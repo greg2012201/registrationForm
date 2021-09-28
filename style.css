@@ -1,0 +1,38 @@
+ /* RESET */
+ * { 
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{ 
+    font-family:sans-serif;
+}
+.title {
+    margin-bottom: 15px;
+    width: 100%;
+    text-align: center
+    
+}
+.form {
+    display: flex;
+    padding: 25px;
+    flex-wrap: wrap;
+    margin: 150px auto;
+    width: 600px;
+    height: 400px;
+    justify-content: space-between;
+    border: 1px solid black;
+}
+.form-field {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+
+.submit-button{
+    height:40px;
+    width: 80px;
+    background-color:white;
+    border: 1px solid black;
+    cursor: pointer;
+}
