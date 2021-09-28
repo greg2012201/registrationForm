@@ -9,20 +9,46 @@
 </head>
 
 <body>
-    <form id="form" class="form">
-        <div>
-            <label for="name">Imię</label>
-            <input name="name" type="test" />
-        </div>
-        <div>
-            <label for="surname">Nazwisko</label>
-            <input name="surname" type="test" />
-        </div>
-        <div>
-            <label for="city">Miasto</label>
-            <input name="city" type="test" />
-        </div>
 
+    <form id="form" class="form">
+        <h1 class="title">Formularz rejestracyjny</h1>
+        <div class="form-field">
+            <label class="control-label" for="name">Imię:</label>
+            <input class="input-control" type="text" name="name" type="test" required />
+        </div>
+        <div class="form-field">
+            <label class="control-label" for="surname">Nazwisko:</label>
+            <input class="input-control" type="text" name="surname" type="test" required />
+        </div>
+        <div class="form-field">
+            <label class="control-label" for="email">e-mail:</label>
+            <input class="input-control" type="email" name="email" type="test" required />
+        </div>
+        <div class="form-field">
+            <label class="control-label" for="tel">telefon:</label>
+            <input class="input-control" type="tel" name="tel" type="test" required />
+        </div>
+        <div class="form-field">
+            <label class="control-label" for="city">Miasto:</label>
+            <input class="input-control" name="city" type="test" required />
+        </div>
+        <div class="form-field">
+            <label class="control-label" for="street">Ulica:</label>
+            <input class="input-control" name="street" type="test" required />
+        </div>
+        <div class="form-field">
+            <label class="control-label" for="house-number">Numer domu:</label>
+            <input class="input-control" name="house-number" type="test" required />
+        </div>
+        <div class="form-field">
+            <label class="control-label" for="appartement-number">Numer mieszkania:</label>
+            <input class="input-control" name="appartement-number" type="test" required />
+        </div>
+        <div class="form-field">
+            <label class="control-label" for="postalCode">Kod pocztowy</label>
+            <input class="input-control" name="postalCode" type="test" required />
+        </div>
+        <button class="submit-button" type="submit">Wyslij</button>
     </form>
     <!-- IMPORTS -->
     <link rel="stylesheet" href="./style.css" />
