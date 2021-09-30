@@ -30,11 +30,14 @@
         </div>
         <div class="form-field">
             <label class="label-control" for="city">Miasto:</label>
-            <input class="input-control" name="city" type="test" required />
+            <select class="input-control" name="city" type="test" required>
+            </select>
         </div>
         <div class="form-field">
             <label class="label-control" for="street">Ulica:</label>
-            <input class="input-control" name="street" type="test" required />
+            <select class="input-control" name="street" type="test">
+                <option name="choose">Wybierz Ulicę</option>
+            </select>
         </div>
         <div class="form-field">
             <label class="label-control" for="house-number">Numer domu:</label>
@@ -45,15 +48,18 @@
             <input class="input-control" name="appartement-number" type="test" required />
         </div>
         <div class="form-field">
-            <label class="label-control" for="postalCode">Kod pocztowy</label>
-            <input class="input-control" name="postalCode" type="test" required />
+            <label class="label-control" for="postal-code">Kod pocztowy</label>
+            <input class="input-control" name="postal-code" type="text" maxlength="6" required />
         </div>
         <button class="submit-button" type="submit">Wyslij</button>
     </form>
     <!-- IMPORTS -->
     <link rel="stylesheet" href="./style.css" />
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="./form.js"></script>
+    <script src="./handleKeyUp.js"></script>
+    <script src="./inputs.js"></script>
+    <script src="./mocks.js"></script>
     <script src="./index.js"></script>
 </body>
 
