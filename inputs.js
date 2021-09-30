@@ -7,7 +7,12 @@ const inputs = function (getElementsToAppend) {
   };
   const transformData = function (data) {
     nodesNumber = data.length;
-    data.forEach(({miejscowosc, ulica}) => {
+    data.forEach(({miejscowosc, ulica}, index) => {
+      if (
+        (index > 1 && data[index - 1].miejscowosc === miejscowosc) ||
+        (index > 1 && data[index - 1].ulica === ulica)
+      )
+        return;
       createElement(miejscowosc, 'city');
       if (!ulica) return;
       createElement(ulica, 'street');
