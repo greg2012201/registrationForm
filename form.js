@@ -2,16 +2,17 @@ const form = function () {
   let prevText;
 
   const fetchData = function (text) {
-    console.log({prevText, text});
     if (prevText === text) return;
+
     cleanUp();
+
     prevText = text;
 
     // getData(mocks);
     $.get(`http://kodpocztowy.intami.pl/api/${text}`, (response) => {
       return getData(response);
     }).fail((error) => {
-      return showError(error);
+      return onError(error);
     });
   };
   const getElementsToAppend = function (options) {
@@ -24,11 +25,12 @@ const form = function () {
 
       switch (nodeName) {
         case 'city': {
-          return $('.input-control[name="city"]').append(node);
+          return $('select[name="city"]').append(node);
         }
         case 'street': {
-          return $('.input-control[name="street"]').append(node);
+          return $('select[name="street"]').append(node);
         }
+
         default: {
           throw Error(
             'You must provide valid node name parameter, expected "city", "street"'
@@ -37,17 +39,46 @@ const form = function () {
       }
     });
   };
-  const showError = function () {
-    alert(`error`);
+  const onError = function (error) {
+    alert(
+      `Coś poszło nie tak nie mogliśmy załadować danych szukanych po kodzie pocztowym.\n
+       \n${
+         error.responseText ? `KOMUNIKAT BŁĘDU: ${error.responseText}` : null
+       }`
+    );
     cleanUp();
   };
-  const cleanUp = function () {
-    console.log('clean');
-    $('option[name="city"]').remove();
-    $('option[name="street"]').remove();
-    prevText = undefined;
+  const onSuccess = function ({
+    name,
+    surname,
+    email,
+    tel,
+    city,
+    street,
+    houseNumber,
+    apartementNumber,
+    postalCode,
+  }) {
+    return alert(
+      `Zarejestrowaleś się poprawnie, Twoje dane: imię: ${name}, nazwisko: ${surname}, email: ${email}, telefon: ${tel}, miejscowość: ${city}, ulica: ${street}, numer domu:${houseNumber}, numer mieszkania: ${apartementNumber}, kod pocztowy: ${postalCode}.`
+    );
   };
-  $('.submit-button').click(cleanUp);
-  const {getData} = inputs(getElementsToAppend);
-  return {fetchData, cleanUp};
+
+  const handleSubmit = function () {
+    const registrationMessage = {
+      name: $('input[name=name]').val(),
+      surname: $('input[name=surname]').val(),
+      email: $('input[name=email]').val(),
+      tel: $('input[name=tel]').val(),
+      city: $('select[name=city]').val(),
+      street: $('select[name=street]').val(),
+      houseNumber: $('input[name=house-number]').val(),
+      apartementNumber: $('input[name=apartement-number]').val(),
+      postalCode: $('input[name=postal-code]').val(),
+    };
+    onSuccess(registrationMessage);
+    return $(form).reset();
+  };
+  const {getData, cleanUp} = optionsFactory(getElementsToAppend);
+  return {fetchData, cleanUp, handleSubmit};
 };
