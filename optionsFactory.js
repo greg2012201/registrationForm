@@ -13,7 +13,7 @@ const optionsFactory = function (getElementsToAppend) {
           isSelected: true,
           value: miejscowosc,
           text: miejscowosc,
-          name: 'city',
+          name: 'locality',
         });
       }
 
@@ -44,7 +44,7 @@ const optionsFactory = function (getElementsToAppend) {
   };
 
   const cleanUp = function () {
-    $('option[name="city"]').remove();
+    $('option[name="locality"]').remove();
     $('option[name="street"]').remove();
     prevText = undefined;
   };
