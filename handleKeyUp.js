@@ -5,7 +5,11 @@ const handleKeyUp = function (event, query, cleanUp) {
   if (inputCurrLength === 0) {
     cleanUp();
   }
+  if (inputCurrLength <= 1) {
+  }
   if (inputCurrLength === inputMaxLength) {
+    const isValidated = postalCodeValidate();
+    if (!isValidated) return;
     return query(inputValue);
   }
 };
