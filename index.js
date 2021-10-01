@@ -6,8 +6,8 @@ $(document).ready(function () {
   $('input[name=postal-code]').keyup((e) => {
     handleKeyUp(e, fetchData, cleanUp);
   });
-  $('.form').submit((e) => {
-    handleSubmit(e);
+  $('.form').submit(() => {
+    handleSubmit();
     return false;
   });
 });
