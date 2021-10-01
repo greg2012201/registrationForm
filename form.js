@@ -8,12 +8,11 @@ const form = function () {
 
     prevText = text;
 
-    getData(mocks);
-    // $.get(`http://kodpocztowy.intami.pl/api/${text}`, (response) => {
-    //   return getData(response);
-    // }).fail((error) => {
-    //   return onError(error);
-    // });
+    $.get(`http://kodpocztowy.intami.pl/api/${text}`, (response) => {
+      return getData(response);
+    }).fail((error) => {
+      return onError(error);
+    });
   };
   const getElementsToAppend = function (options) {
     render(options);
@@ -59,7 +58,7 @@ const form = function () {
     apartementNumber,
     postalCode,
   }) {
-    return alert(
+    alert(
       `Zarejestrowaleś się poprawnie, Twoje dane: imię: ${name}, nazwisko: ${surname}, email: ${email}, telefon: ${tel}, miejscowość: ${locality}, ulica: ${street}, numer domu:${houseNumber}, numer mieszkania: ${apartementNumber}, kod pocztowy: ${postalCode}.`
     );
   };
@@ -73,11 +72,20 @@ const form = function () {
       locality: $('select[name=locality]').val(),
       street: $('select[name=street]').val(),
       houseNumber: $('input[name=house-number]').val(),
-      apartementNumber: $('input[name=apartement-number]').val(),
+      apartementNumber: $('input[name=apartement-number]').val()
+        ? $('input[name=apartement-number]').val()
+        : 'brak',
       postalCode: $('input[name=postal-code]').val(),
     };
     onSuccess(registrationMessage);
-    return $(form).reset();
+    setTimeout(formReset, 100);
+  };
+  const formReset = function () {
+    const cleanInputs = function (e) {
+      e.value = '';
+    };
+    [...$('input')].forEach((e) => cleanInputs(e));
+    cleanUp();
   };
   const {getData, cleanUp} = optionsFactory(getElementsToAppend);
   return {fetchData, cleanUp, handleSubmit};
