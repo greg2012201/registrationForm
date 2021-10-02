@@ -8,11 +8,17 @@ const form = function () {
 
     prevText = text;
 
-    $.get(`http://kodpocztowy.intami.pl/api/${text}`, (response) => {
-      return getData(response);
-    }).fail((error) => {
-      return onError(error);
-    });
+    $.ajax({
+      method: 'GET',
+      url: `http://kodpocztowy.intami.pl/api/${text}`,
+      Accept: 'application/json',
+    })
+      .done((response) => {
+        return getData(response);
+      })
+      .fail((error) => {
+        return onError(error);
+      });
   };
   const getElementsToAppend = function (options) {
     render(options);
