@@ -1,30 +1,39 @@
 const optionsFactory = function (getElementsToAppend) {
   let options = [];
-  let nodesNumber = 0;
 
   const getData = function (data) {
     return setElementsProps(data);
   };
   const setElementsProps = function (data) {
     nodesNumber = data.length;
-    data.forEach(({miejscowosc, ulica}, index) => {
-      if (index === 0) {
+    data
+      .reduce((acc, curr) => {
+        const duplicate = acc.find(
+          (item) => item.miejscowosc === curr.miejscowosc
+        );
+        if (!duplicate) {
+          return [...acc, curr];
+        } else {
+          return acc;
+        }
+      }, [])
+      .forEach(({miejscowosc, ulica}, index) => {
+        const isSelected = index === 0;
         createElement({
-          isSelected: true,
+          isSelected,
           value: miejscowosc,
           text: miejscowosc,
           name: 'locality',
         });
-      }
 
-      if (!ulica) return;
-      createElement({
-        isSelected: index === 0,
-        value: ulica,
-        text: ulica,
-        name: 'street',
+        if (!ulica) return;
+        createElement({
+          isSelected,
+          value: ulica,
+          text: ulica,
+          name: 'street',
+        });
       });
-    });
   };
 
   const createElement = function ({isSelected, value, text, name}) {
@@ -34,13 +43,11 @@ const optionsFactory = function (getElementsToAppend) {
         isSelected ? 'selected' : ''
       } value="${value}" name="${name}">${text}</option>`
     );
-
     $(fragment).append(option);
     options.push(fragment);
-    if (options.length === nodesNumber) {
-      getElementsToAppend(options);
-      return (options = []);
-    }
+
+    getElementsToAppend(options);
+    return (options = []);
   };
 
   const cleanUp = function () {
