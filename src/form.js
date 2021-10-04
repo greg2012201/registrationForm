@@ -90,5 +90,5 @@ const form = function () {
     $('form').reset();
   };
   const {getData, cleanUp} = optionsFactory(getElementsToAppend);
-  return {fetchData, cleanUp, handleSubmit};
+  return {fetchData, handleSubmit};
 };

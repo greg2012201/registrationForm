@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  const {fetchData, cleanUp, handleSubmit} = form();
+  const {fetchData, handleSubmit} = form();
 
   // LISTINERS
 
