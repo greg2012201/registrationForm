@@ -82,7 +82,7 @@ const form = function () {
       postalCode: $('input[name=postal-code]').val(),
     };
     onSuccess(registrationMessage);
-    setTimeout(formReset, 100);
+    formReset();
   };
   const formReset = function () {
     const cleanInputs = function (e) {
@@ -90,6 +90,7 @@ const form = function () {
     };
     [...$('input')].forEach((e) => cleanInputs(e));
     cleanUp(postalCodeCache);
+    $('form').reset();
   };
   const {getData, cleanUp} = optionsFactory(getElementsToAppend);
   return {fetchData, cleanUp, handleSubmit};
