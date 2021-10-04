@@ -1,9 +1,9 @@
 # registrationForm
-Simple polish registration form writen in HTML, CSS, jQuery. 
+Simple polish registration form writen in HTML, CSS, JQuery. 
 
-## how to run
+## How to run
 
-Clone or download repository then run index.html file. 
+Clone or download repository and run index.html file. 
 I used VScode and the LiveServer extension for development.
 
 
