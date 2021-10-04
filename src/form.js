@@ -42,7 +42,7 @@ const form = function () {
       }
     });
   };
-  const onError = function (error) {
+  const onError = function () {
     alert(
       `Coś poszło nie tak nie mogliśmy załadować danych szukanych po kodzie pocztowym.`
     );
