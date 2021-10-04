@@ -1,12 +1,10 @@
 const form = function () {
-  let prevText;
+  let postalCodeCache;
 
   const fetchData = function (text) {
-    if (prevText === text) return;
-
+    if (postalCodeCache === text) return;
     cleanUp();
-
-    prevText = text;
+    postalCodeCache = text;
 
     $.ajax({
       method: 'GET',
@@ -51,7 +49,7 @@ const form = function () {
          error.responseText ? `KOMUNIKAT BŁĘDU: ${error.responseText}` : null
        }`
     );
-    cleanUp();
+    cleanUp(postalCodeCache);
   };
   const onSuccess = function ({
     name,
@@ -91,7 +89,7 @@ const form = function () {
       e.value = '';
     };
     [...$('input')].forEach((e) => cleanInputs(e));
-    cleanUp();
+    cleanUp(postalCodeCache);
   };
   const {getData, cleanUp} = optionsFactory(getElementsToAppend);
   return {fetchData, cleanUp, handleSubmit};
