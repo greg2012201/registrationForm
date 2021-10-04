@@ -4,7 +4,7 @@ $(document).ready(function () {
   // LISTINERS
 
   $('input[name=postal-code]').keyup((e) => {
-    handleKeyUp(e, fetchData, cleanUp);
+    handleKeyUp(e, fetchData);
   });
   $('form').submit(() => {
     handleSubmit();
