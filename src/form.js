@@ -44,10 +44,7 @@ const form = function () {
   };
   const onError = function (error) {
     alert(
-      `Coś poszło nie tak nie mogliśmy załadować danych szukanych po kodzie pocztowym.\n
-       \n${
-         error.responseText ? `KOMUNIKAT BŁĘDU: ${error.responseText}` : null
-       }`
+      `Coś poszło nie tak nie mogliśmy załadować danych szukanych po kodzie pocztowym.`
     );
     cleanUp(postalCodeCache);
   };
