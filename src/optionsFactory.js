@@ -8,7 +8,7 @@ const optionsFactory = function (getElementsToAppend) {
     const transformedData = {
       localities: new Set(data.map(({miejscowosc}) => miejscowosc)),
       streets: new Set(data.map(({ulica}) => ulica)),
-    };
+    }; // remove duplicated values
     setElementProps({texts: transformedData.localities, name: 'locality'});
     setElementProps({texts: transformedData.streets, name: 'street'});
   };
