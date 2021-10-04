@@ -2,38 +2,27 @@ const optionsFactory = function (getElementsToAppend) {
   let options = [];
 
   const getData = function (data) {
-    return setElementsProps(data);
+    return transformData(data);
   };
-  const setElementsProps = function (data) {
-    nodesNumber = data.length;
-    data
-      .reduce((acc, curr) => {
-        const duplicate = acc.find(
-          (item) => item.miejscowosc === curr.miejscowosc
-        );
-        if (!duplicate) {
-          return [...acc, curr];
-        } else {
-          return acc;
-        }
-      }, [])
-      .forEach(({miejscowosc, ulica}, index) => {
-        const isSelected = index === 0;
-        createElement({
-          isSelected,
-          value: miejscowosc,
-          text: miejscowosc,
-          name: 'locality',
-        });
+  const transformData = function (data) {
+    const transformedData = {
+      localities: new Set(data.map(({miejscowosc}) => miejscowosc)),
+      streets: new Set(data.map(({ulica}) => ulica)),
+    };
+    setElementProps({texts: transformedData.localities, name: 'locality'});
+    setElementProps({texts: transformedData.streets, name: 'street'});
+  };
 
-        if (!ulica) return;
-        createElement({
-          isSelected,
-          value: ulica,
-          text: ulica,
-          name: 'street',
-        });
+  const setElementProps = function ({texts, name}) {
+    Array.from(texts).forEach((text, index) => {
+      if (!text) return;
+      createElement({
+        isSelected: index === 0,
+        value: text,
+        text: text,
+        name: `${name}`,
       });
+    });
   };
 
   const createElement = function ({isSelected, value, text, name}) {
@@ -53,7 +42,7 @@ const optionsFactory = function (getElementsToAppend) {
   const cleanUp = function () {
     $('option[name="locality"]').remove();
     $('option[name="street"]').remove();
-    prevText = undefined;
+    cache = undefined;
   };
   return {getData, cleanUp};
 };
